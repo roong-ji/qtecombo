@@ -4,7 +4,7 @@ public class EnemyAction : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
 
-    [Header("ÀÌµ¿ ¼Óµµ")]
+    [Header("ì´ë™ ì†ë„")]
     [SerializeField] private float _defaultSpeed;
     private float _finalSpeed;
 

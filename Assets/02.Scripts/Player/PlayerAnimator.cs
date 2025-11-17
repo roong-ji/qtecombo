@@ -5,8 +5,8 @@ public class PlayerAnimator : MonoBehaviour
     private Animator _animator;
 
     private readonly int[] _attack = { Animator.StringToHash("Attack1"),
-                                        Animator.StringToHash("Attack2"),
-                                        Animator.StringToHash("Attack3") };
+                                        Animator.StringToHash("Attack2") };
+    private readonly int _blockAttack = Animator.StringToHash("Attack3");
     private readonly int _jump = Animator.StringToHash("Jump");
     private readonly int _block = Animator.StringToHash("Block");
     private readonly int _idleBlock = Animator.StringToHash("IdleBlock");
@@ -20,10 +20,16 @@ public class PlayerAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void PlayAttackAnimation(int attackType)
+    public void PlayAttackAnimation(EEnemyType attackType)
     {
-        _animator.SetTrigger(_attack[attackType]);
+        _animator.SetTrigger(_attack[(int)attackType]);
     }
+
+    public void PlayBlockAttackAnimation()
+    {
+        _animator.SetTrigger(_blockAttack);
+    }
+
     public void PlayJumpAnimation()
     {
         _animator.SetTrigger(_jump);

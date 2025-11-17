@@ -6,9 +6,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _deafaultScore;
     public float DeafaultScore => _deafaultScore;
 
-    EEnemyType _enemyType;
+    [SerializeField] EEnemyType _enemyType;
 
     private EnemyController _enemyController;
+
+    private void Awake()
+    {
+        _enemyController = GetComponent<EnemyController>();
+    }
 
     public void TakeHit()
     {
@@ -19,5 +24,4 @@ public class Enemy : MonoBehaviour
     {
         return _enemyType == enemyType;
     }
-
 }

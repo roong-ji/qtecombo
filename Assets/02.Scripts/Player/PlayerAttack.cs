@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -40,19 +42,6 @@ public class PlayerAttack : MonoBehaviour
         ScoreManager.Instance.AddScore(distance * enemy.DeafaultScore);
 
         enemy.TakeHit();
-    }
-    public bool Block()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(
-        _attackBox.position,
-        Vector2.right,
-        _attackBoxLength,
-        _enemyLayer
-        );
-
-        if (hit.collider == null) return false;
-
-        return true;
     }
 
     private void OnDrawGizmos()

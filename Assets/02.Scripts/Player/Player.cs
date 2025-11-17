@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
 
     private PlayerController _playerController;
 
+    private bool _isBlocking;
+    public bool IsBlocking => _isBlocking;
+
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();

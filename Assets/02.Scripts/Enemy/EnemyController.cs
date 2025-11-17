@@ -1,16 +1,17 @@
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class EnemyController : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour
 {
-    private EnemyMove _enemyAction;
-    private EnemyAnimator _enemyAnimator;
-    private Player _player;
+    protected EnemyMove _enemyMove;
+    protected EnemyAnimator _enemyAnimator;
+    protected Player _player;
 
-    private Collider2D _collider;
+    protected Collider2D _collider;
+    [SerializeField] private GameObject _guide;
+    
     private void Awake()
     {
-        _enemyAction = GetComponent<EnemyMove>();
+        _enemyMove = GetComponent<EnemyMove>();
         _enemyAnimator = GetComponent<EnemyAnimator>();
         _collider = GetComponent<Collider2D>();
     }
@@ -20,28 +21,22 @@ public class EnemyController : MonoBehaviour
         Init();
     }
 
-    private void Init()
-    {
-        _collider.enabled = true;
-    }
+    protected abstract void Init();
 
     private void PlayAttack()
     {
         _enemyAnimator.PlayAttackAnimation();
-        _enemyAction.StopMove();
+        _enemyMove.StopMove();
     }
 
-    public void Attack()
-    {
-        _player.TakeHit();
-        _collider.enabled = false;
-    }
+    public abstract void Attack();
 
     public void TakeHit()
     {
         _enemyAnimator.PlayTakeHitAnimation();
-        _enemyAction.StopMove();
+        _enemyMove.StopMove();
         _collider.enabled = false;
+        Destroy(_guide);
     }
 
     public void Death()
@@ -55,5 +50,4 @@ public class EnemyController : MonoBehaviour
         _player = collision.GetComponent<Player>();
         PlayAttack();
     }
-
 }

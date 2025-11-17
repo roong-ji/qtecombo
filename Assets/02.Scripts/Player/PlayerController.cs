@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimator _playerAnimator;
     private PlayerMove _playerMove;
     private PlayerAttack _playerAttack;
+    private PlayerBlock _playerBlock;
     private Rigidbody2D _rigidbody2D;
 
     private bool _isJumping;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
         _playerAnimator = GetComponent<PlayerAnimator>();
         _playerMove = GetComponent<PlayerMove>();
         _playerAttack = GetComponent<PlayerAttack>();
+        _playerBlock = GetComponent<PlayerBlock>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
         _isIdleBlock = false;
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            InputAttack(EEnemyType.Goblin);
+            InputAttack(EEnemyType.Mushroom);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -49,16 +51,18 @@ public class PlayerController : MonoBehaviour
 
     public void InputBlock()
     {
+
         if (_isIdleBlock == true)
         {
-            InputAttack(EEnemyType.FlyingEye);
+            _playerBlock.BlockAttack();
+            _playerAnimator.PlayBlockAttackAnimation();
             _isIdleBlock = false;
             return;
         }
 
         _playerAnimator.PlayBlockAnimation();
         
-        if (_playerAttack.Block() == false) return;
+        if (_playerBlock.Block() == false) return;
         _playerAnimator.PlayIdleBlockAnimation();
 
         _isIdleBlock = true;
@@ -73,7 +77,7 @@ public class PlayerController : MonoBehaviour
     public void InputAttack(EEnemyType attackType)
     {
         _playerAttack.Attack(attackType);
-        _playerAnimator.PlayAttackAnimation((int)attackType);
+        _playerAnimator.PlayAttackAnimation(attackType);
     }
 
     public void InputJump()

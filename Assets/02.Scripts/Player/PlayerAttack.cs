@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (hit.collider == null) return;
 
-        EnemyController enemy = hit.collider.GetComponent<EnemyController>();
+        Enemy enemy = hit.collider.GetComponent<Enemy>();
 
         if (enemy.CompareType(enemyType) == false) return;
 

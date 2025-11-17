@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Player _player;
     private PlayerAnimator _playerAnimator;
     private PlayerMove _playerMove;
     private PlayerAttack _playerAttack;
@@ -9,19 +10,16 @@ public class PlayerController : MonoBehaviour
 
     private bool _isJumping;
     private bool _isIdleBlock;
-    private bool _isDeath;
-
-    [Header("체력")]
-    [SerializeField] private int _health;
 
     private void Awake()
     {
+        _player = GetComponent<Player>();
         _playerAnimator = GetComponent<PlayerAnimator>();
         _playerMove = GetComponent<PlayerMove>();
         _playerAttack = GetComponent<PlayerAttack>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
-        _isDeath = false;
+        _isIdleBlock = false;
     }
 
     private void Update()
@@ -90,19 +88,12 @@ public class PlayerController : MonoBehaviour
 
     public void TakeHit()
     {
-        if (_isDeath == true) return;
-
         _playerAnimator.PlayHurtAnimation();
-        --_health;
-
-        if (_health > 0) return;
-        Death();
     }
 
-    private void Death()
+    public void Death()
     {
         _playerAnimator.PlayDeathAnimation();
-        _isDeath = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

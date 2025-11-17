@@ -1,19 +1,13 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyController : MonoBehaviour
 {
     private EnemyMove _enemyAction;
     private EnemyAnimator _enemyAnimator;
-    private PlayerController _player;
+    private Player _player;
 
     private Collider2D _collider;
-
-    [Header("점수 증가량")]
-    [SerializeField] private float _deafaultScore;
-    public float DeafaultScore => _deafaultScore;
-
-    EEnemyType _enemyType;
-
     private void Awake()
     {
         _enemyAction = GetComponent<EnemyMove>();
@@ -23,7 +17,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
-        Init();        
+        Init();
     }
 
     private void Init()
@@ -40,9 +34,9 @@ public class EnemyController : MonoBehaviour
     public void Attack()
     {
         _player.TakeHit();
-        _collider.enabled=false;
+        _collider.enabled = false;
     }
-    
+
     public void TakeHit()
     {
         _enemyAnimator.PlayTakeHitAnimation();
@@ -55,15 +49,10 @@ public class EnemyController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public bool CompareType(EEnemyType enemyType)
-    {
-        return _enemyType == enemyType;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") == false) return;
-        _player = collision.GetComponent<PlayerController>();
+        _player = collision.GetComponent<Player>();
         PlayAttack();
     }
 

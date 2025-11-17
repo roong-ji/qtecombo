@@ -20,7 +20,7 @@ public class EnemyAction : MonoBehaviour
 
     private void InitSpeed()
     {
-        _finalSpeed = _defaultSpeed;
+        _finalSpeed = SpeedManager.Instance.Speed * _defaultSpeed;
     }
 
     private void FixedUpdate()

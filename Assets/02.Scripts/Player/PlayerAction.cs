@@ -12,6 +12,10 @@ public class PlayerAction : MonoBehaviour
     [SerializeField] private float _attackBoxLength;
     [SerializeField] private LayerMask _enemyLayer;
 
+    private const float PERFECT_DISTANCE = 1.75f;
+    private const float GREAT_DISTANCE = 1.25f;
+    private const float GOOD_DISTANCE = 0.5f;
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -31,7 +35,17 @@ public class PlayerAction : MonoBehaviour
         EnemyController enemy = hit.collider.GetComponent<EnemyController>();
 
         float distance = hit.distance;
-        Debug.Log(distance);
+
+#if UNITY_EDITOR
+        //Debug.Log(distance);
+
+        if (distance > PERFECT_DISTANCE) Debug.Log("PERFECT");
+        else if (distance < GREAT_DISTANCE) Debug.Log("GREAT");
+        else if (distance < GOOD_DISTANCE) Debug.Log("GOOD");
+        else Debug.Log("BAD");
+#endif
+
+        ScoreManager.Instance.AddScore(distance * enemy.DeafaultScore);
             
         enemy.TakeHit();
     }

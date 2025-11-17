@@ -8,6 +8,10 @@ public class EnemyController : MonoBehaviour
 
     private Collider2D _collider;
 
+    [Header("점수 증가량")]
+    [SerializeField] private float _deafaultScore;
+    public float DeafaultScore => _deafaultScore;
+
     private void Awake()
     {
         _enemyAction = GetComponent<EnemyAction>();

@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
     public void TakeHit()
     {
+        if (_isDeath == true) return;
+
         _playerAnimator.PlayHurtAnimation();
         --_health;
 
@@ -74,7 +76,6 @@ public class PlayerController : MonoBehaviour
 
     private void Death()
     {
-        if (_isDeath == true) return;
         _playerAnimator.PlayDeathAnimation();
         _isDeath = true;
     }

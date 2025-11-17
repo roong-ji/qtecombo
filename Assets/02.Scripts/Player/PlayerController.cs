@@ -1,12 +1,16 @@
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private PlayerAnimator _playerAnimator;
     private PlayerAction _playerAction;
     private Rigidbody2D _rigidbody2D;
 
     private bool _isJumping;
+    private bool _isDeath;
+
+    [Header("Ã¼·Â")]
+    [SerializeField] private int _health;
 
     private void Awake()
     {
@@ -14,6 +18,7 @@ public class PlayerInput : MonoBehaviour
         _playerAction = GetComponent<PlayerAction>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
+        _isDeath = false;
     }
 
     private void Update()
@@ -36,19 +41,19 @@ public class PlayerInput : MonoBehaviour
         _playerAnimator.PlayFallAnimation(_rigidbody2D.linearVelocity.y);
     }
 
-    private void InputBlock()
+    public void InputBlock()
     {
         _playerAction.Block();
         _playerAnimator.PlayBlockAnimation();
     }
 
-    private void InputAttack()
+    public void InputAttack()
     {
         _playerAction.Attack();
         _playerAnimator.PlayAttackAnimation();
     }
 
-    private void InputJump()
+    public void InputJump()
     {
         if (_isJumping == true) return;
 
@@ -57,6 +62,23 @@ public class PlayerInput : MonoBehaviour
 
         _isJumping = true;
     }
+
+    public void TakeHit()
+    {
+        _playerAnimator.PlayHurtAnimation();
+        --_health;
+
+        if (_health > 0) return;
+        Death();
+    }
+
+    private void Death()
+    {
+        if (!_isDeath == true) return;
+        _playerAnimator.PlayDeathAnimation();
+        _isDeath = true;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") == false) return;

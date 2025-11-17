@@ -11,6 +11,8 @@ public class PlayerAnimator : MonoBehaviour
     private readonly int _block = Animator.StringToHash("Block");
     private readonly int _grounded = Animator.StringToHash("Grounded");
     private readonly int _airSpeedY = Animator.StringToHash("AirSpeedY");
+    private readonly int _hurt = Animator.StringToHash("Hurt");
+    private readonly int _death = Animator.StringToHash("Death");
 
     private int _attackIndex = 0;
 
@@ -44,5 +46,15 @@ public class PlayerAnimator : MonoBehaviour
     public void EndJumpAnimation()
     {
         _animator.SetBool(_grounded, true);
+    }
+
+    public void PlayHurtAnimation()
+    {
+        _animator.SetTrigger(_hurt);
+    }
+
+    public void PlayDeathAnimation()
+    {
+        _animator.SetTrigger(_death);
     }
 }

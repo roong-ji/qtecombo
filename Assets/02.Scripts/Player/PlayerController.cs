@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private bool _isJumping;
     private bool _isBlocking;
+    private bool _counterAttack;
 
     public bool IsBlocking => _isBlocking;
 
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
         _isBlocking = false;
+        _counterAttack = false;
     }
 
     private void Update()
@@ -51,40 +53,44 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.PlayFallAnimation(_rigidbody2D.linearVelocity.y);
     }
 
+    public void Block(Enemy enemy)
+    {
+        _counterAttack = true;
+        _playerBlock.Block(enemy);
+    }
+
     public void InputBlock()
     {
-        _isBlocking = true;
-        Debug.Log("blocked");
-        _playerAnimator.PlayBlockAnimation();
-
-        /*
-        if (_isIdleBlock == true)
+        if(_counterAttack == true)
         {
-            _playerBlock.BlockAttack();
-            _playerAnimator.PlayBlockAttackAnimation();
-            _isIdleBlock = false;
+            InputCounterAttack();
             return;
         }
 
+        _isBlocking = true;
+        Debug.Log("blocked");
         _playerAnimator.PlayBlockAnimation();
-        
-        if (_playerBlock.Block() == false) return;
-        _playerAnimator.PlayIdleBlockAnimation();
-
-        _isIdleBlock = true;*/
     }
 
     public void InputEndBlock()
     {
         Debug.Log("block end");
         _isBlocking = false;
+        _counterAttack = false;
+    }
+
+    private void InputCounterAttack()
+    {
+        _playerBlock.BlockAttack();
+        _playerAnimator.PlayBlockAttackAnimation();
+        _counterAttack = false;
     }
 
     public void InputAttack(EEnemyType attackType)
     {
         _playerAttack.Attack(attackType);
         _playerAnimator.PlayAttackAnimation(attackType);
-        //InputEndBlock();
+        InputEndBlock();
     }
 
     public void InputJump()
@@ -95,7 +101,7 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.PlayJumpAnimation();
 
         _isJumping = true;
-        //InputEndBlock();
+        InputEndBlock();
     }
 
     public void TakeHit()

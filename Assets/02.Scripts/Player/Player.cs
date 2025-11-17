@@ -24,4 +24,9 @@ public class Player : MonoBehaviour
         if (_health > 0) return;
         _playerController.Death();
     }
+
+    public void Block(Enemy enemy)
+    {
+        _playerController.Block(enemy);
+    }
 }

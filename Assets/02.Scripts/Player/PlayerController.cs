@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private bool _isJumping;
     private bool _isDeath;
 
-    [Header("Ã¼·Â")]
+    [Header("ì²´ë ¥")]
     [SerializeField] private int _health;
 
     private void Awake()
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     private void Death()
     {
-        if (!_isDeath == true) return;
+        if (_isDeath == true) return;
         _playerAnimator.PlayDeathAnimation();
         _isDeath = true;
     }

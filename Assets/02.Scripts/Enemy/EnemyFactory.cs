@@ -33,7 +33,7 @@ public class EnemyFactory : MonoBehaviour
         _instance = this;
     }
 
-    [Header("¸ó½ºÅÍ ÇÁ¸®ÆÕ")]
+    [Header("ëª¬ìŠ¤í„° í”„ë¦¬íŒ¹")]
     [SerializeField] private EnemyData[] _enemies;
 
     private Dictionary<EEnemyType, List<GameObject>> _enemyPools;

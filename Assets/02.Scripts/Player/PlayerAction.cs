@@ -4,10 +4,10 @@ public class PlayerAction : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     
-    [Header("Á¡ÇÁ·Â")]
+    [Header("ì í”„ë ¥")]
     [SerializeField] private float _jumpForce;
 
-    [Header("°ø°İ ¹üÀ§")]
+    [Header("ê³µê²© ë²”ìœ„")]
     [SerializeField] private Transform _attackBox;
     [SerializeField] private float _attackBoxLength;
     [SerializeField] private LayerMask _enemyLayer;

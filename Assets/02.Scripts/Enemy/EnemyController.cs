@@ -4,7 +4,7 @@ public class EnemyController : MonoBehaviour
 {
     private EnemyAction _enemyAction;
     private EnemyAnimator _enemyAnimator;
-    private GameObject _player;
+    private PlayerController _player;
 
     private Collider2D _collider;
 
@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
-        _player.GetComponent<PlayerController>().TakeHit();
+        _player.TakeHit();
         _collider.enabled=false;
     }
     
@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") == false) return;
-        _player = collision.gameObject;
+        _player = collision.GetComponent<PlayerController>();
         PlayAttack();
     }
 

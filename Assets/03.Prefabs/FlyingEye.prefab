@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1055242060566731078}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Guide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6138153784495840259}
   - component: {fileID: 2170484923281691936}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GuideArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 8657479043381447687}
   - component: {fileID: 4252509591766250908}
   - component: {fileID: 4174301676741751998}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GuideButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}

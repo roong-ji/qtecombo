@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
 
     private bool _isJumping;
-    private bool _isIdleBlock;
+    private bool _isBlocking;
+
+    public bool IsBlocking => _isBlocking;
 
     private void Awake()
     {
@@ -21,7 +23,7 @@ public class PlayerController : MonoBehaviour
         _playerBlock = GetComponent<PlayerBlock>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
-        _isIdleBlock = false;
+        _isBlocking = false;
     }
 
     private void Update()
@@ -51,7 +53,11 @@ public class PlayerController : MonoBehaviour
 
     public void InputBlock()
     {
+        _isBlocking = true;
+        Debug.Log("blocked");
+        _playerAnimator.PlayBlockAnimation();
 
+        /*
         if (_isIdleBlock == true)
         {
             _playerBlock.BlockAttack();
@@ -65,19 +71,20 @@ public class PlayerController : MonoBehaviour
         if (_playerBlock.Block() == false) return;
         _playerAnimator.PlayIdleBlockAnimation();
 
-        _isIdleBlock = true;
+        _isIdleBlock = true;*/
     }
 
     public void InputEndBlock()
     {
-        _isIdleBlock = false;
-        _playerAnimator.EndIdleBlockAnimation();
+        Debug.Log("block end");
+        _isBlocking = false;
     }
 
     public void InputAttack(EEnemyType attackType)
     {
         _playerAttack.Attack(attackType);
         _playerAnimator.PlayAttackAnimation(attackType);
+        //InputEndBlock();
     }
 
     public void InputJump()
@@ -88,11 +95,13 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.PlayJumpAnimation();
 
         _isJumping = true;
+        //InputEndBlock();
     }
 
     public void TakeHit()
     {
         _playerAnimator.PlayHurtAnimation();
+        InputEndBlock();
     }
 
     public void Death()

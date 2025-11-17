@@ -7,8 +7,7 @@ public class Player : MonoBehaviour
 
     private PlayerController _playerController;
 
-    private bool _isBlocking;
-    public bool IsBlocking => _isBlocking;
+    public bool IsBlocking => _playerController.IsBlocking;
 
     private void Awake()
     {

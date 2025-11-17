@@ -4,6 +4,7 @@ using UnityEngine;
 public enum EEnemyType
 {
     FlyingEye = 0,
+    Goblin = 2,
 }
 
 [Serializable]

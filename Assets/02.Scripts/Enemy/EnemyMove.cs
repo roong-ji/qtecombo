@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyAction : MonoBehaviour
+public class EnemyMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
 

@@ -3,10 +3,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerAnimator _playerAnimator;
-    private PlayerAction _playerAction;
+    private PlayerMove _playerMove;
+    private PlayerAttack _playerAttack;
     private Rigidbody2D _rigidbody2D;
 
     private bool _isJumping;
+    private bool _isIdleBlock;
     private bool _isDeath;
 
     [Header("체력")]
@@ -15,7 +17,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _playerAnimator = GetComponent<PlayerAnimator>();
-        _playerAction = GetComponent<PlayerAction>();
+        _playerMove = GetComponent<PlayerMove>();
+        _playerAttack = GetComponent<PlayerAttack>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
         _isDeath = false;
@@ -30,10 +33,15 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            InputAttack();
+            InputAttack(EEnemyType.FlyingEye);
         }
 
         if (Input.GetKeyDown(KeyCode.C))
+        {
+            InputAttack(EEnemyType.Goblin);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             InputJump();
         }
@@ -43,21 +51,38 @@ public class PlayerController : MonoBehaviour
 
     public void InputBlock()
     {
-        _playerAction.Block();
+        if (_isIdleBlock == true)
+        {
+            InputAttack(EEnemyType.FlyingEye);
+            _isIdleBlock = false;
+            return;
+        }
+
         _playerAnimator.PlayBlockAnimation();
+        
+        if (_playerAttack.Block() == false) return;
+        _playerAnimator.PlayIdleBlockAnimation();
+
+        _isIdleBlock = true;
     }
 
-    public void InputAttack()
+    public void InputEndBlock()
     {
-        _playerAction.Attack();
-        _playerAnimator.PlayAttackAnimation();
+        _isIdleBlock = false;
+        _playerAnimator.EndIdleBlockAnimation();
+    }
+
+    public void InputAttack(EEnemyType attackType)
+    {
+        _playerAttack.Attack(attackType);
+        _playerAnimator.PlayAttackAnimation((int)attackType);
     }
 
     public void InputJump()
     {
         if (_isJumping == true) return;
 
-        _playerAction.Jump();
+        _playerMove.Jump();
         _playerAnimator.PlayJumpAnimation();
 
         _isJumping = true;

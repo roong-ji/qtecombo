@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private EnemyAction _enemyAction;
+    private EnemyMove _enemyAction;
     private EnemyAnimator _enemyAnimator;
     private PlayerController _player;
 
@@ -12,9 +12,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float _deafaultScore;
     public float DeafaultScore => _deafaultScore;
 
+    EEnemyType _enemyType;
+
     private void Awake()
     {
-        _enemyAction = GetComponent<EnemyAction>();
+        _enemyAction = GetComponent<EnemyMove>();
         _enemyAnimator = GetComponent<EnemyAnimator>();
         _collider = GetComponent<Collider2D>();
     }
@@ -51,6 +53,11 @@ public class EnemyController : MonoBehaviour
     public void Death()
     {
         gameObject.SetActive(false);
+    }
+
+    public bool CompareType(EEnemyType enemyType)
+    {
+        return _enemyType == enemyType;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

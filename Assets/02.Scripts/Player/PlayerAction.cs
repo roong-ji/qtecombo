@@ -29,7 +29,6 @@ public class PlayerAction : MonoBehaviour
         if (hit.collider == null) return;
 
         EnemyController enemy = hit.collider.GetComponent<EnemyController>();
-        if (enemy.IsHittable == false) return;
 
         float distance = hit.distance;
         Debug.Log(distance);

@@ -6,14 +6,23 @@ public class EnemyController : MonoBehaviour
     private EnemyAnimator _enemyAnimator;
     private GameObject _player;
 
-    private bool _isHittable;
-    public bool IsHittable => _isHittable;
+    private Collider2D _collider;
 
     private void Awake()
     {
         _enemyAction = GetComponent<EnemyAction>();
         _enemyAnimator = GetComponent<EnemyAnimator>();
-        _isHittable = true;
+        _collider = GetComponent<Collider2D>();
+    }
+
+    private void OnEnable()
+    {
+        Init();        
+    }
+
+    private void Init()
+    {
+        _collider.enabled = true;
     }
 
     private void PlayAttack()
@@ -25,14 +34,14 @@ public class EnemyController : MonoBehaviour
     public void Attack()
     {
         _player.GetComponent<PlayerController>().TakeHit();
-        _isHittable = false;
+        _collider.enabled=false;
     }
     
     public void TakeHit()
     {
         _enemyAnimator.PlayTakeHitAnimation();
         _enemyAction.StopMove();
-        _isHittable = false;
+        _collider.enabled = false;
     }
 
     public void Death()
@@ -43,7 +52,6 @@ public class EnemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") == false) return;
-        if (IsHittable == false) return;
         _player = collision.gameObject;
         PlayAttack();
     }

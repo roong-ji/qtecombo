@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
 
     private bool _isJumping;
+    private bool _isDeath;
 
     [Header("Ã¼·Â")]
     [SerializeField] private int _health;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
         _playerAction = GetComponent<PlayerAction>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
+        _isDeath = false;
     }
 
     private void Update()
@@ -72,7 +74,9 @@ public class PlayerController : MonoBehaviour
 
     private void Death()
     {
+        if (!_isDeath == true) return;
         _playerAnimator.PlayDeathAnimation();
+        _isDeath = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

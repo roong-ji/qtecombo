@@ -3,12 +3,14 @@ using System.Collections.Generic;
 
 public class QTEEnemyController : EnemyController
 {
+    [SerializeField] private GameObject _arrow;
     [SerializeField] private GameObject[] _guideButtons;
     [SerializeField] private SpriteRenderer[] _buttons;
     [SerializeField] private Sprite[] _buttonSprites;
     private Queue<int> _qteQueue;
     private EButton _inputButton;
     private int _index;
+    private Vector2 _originArrowPosition;
 
     public enum EButton
     {
@@ -22,6 +24,7 @@ public class QTEEnemyController : EnemyController
     private void Start()
     {
         _qteQueue = new Queue<int>();
+        _originArrowPosition = _arrow.transform.position;
     }
 
     private void OnEnable()
@@ -66,6 +69,7 @@ public class QTEEnemyController : EnemyController
             _qteQueue.Dequeue();
             _inputButton = 0;
             _guideButtons[_index++].SetActive(false);
+            _arrow.transform.position += Vector3.right;
 
             if (_qteQueue.Count > 0) return;
             EndQTE(); 
@@ -102,16 +106,11 @@ public class QTEEnemyController : EnemyController
         {
             _guideButtons[i].SetActive(false);
         }
-        /*foreach(var button in _buttons)
-        {
-            int random = Random.Range(0, _buttonSprites.Length);
-            button.sprite = _buttonSprites[random];
-            _qteQueue.Enqueue(random);
-        }*/
     }
 
     private void EndQTE()
     {
+        _guide.SetActive(false);
         _player.QTEMode(false);
         Time.timeScale = 1f;
     }
@@ -127,7 +126,6 @@ public class QTEEnemyController : EnemyController
     {
         _enemyAnimator.PlayAttackAnimation();
         _enemyMove.StopMove();
-        _guide.SetActive(false);
     }
 
     public override void Attack()
@@ -149,6 +147,7 @@ public class QTEEnemyController : EnemyController
 
     public override void Death()
     {
+        _arrow.transform.position = _originArrowPosition;
         gameObject.SetActive(false);
     }
 

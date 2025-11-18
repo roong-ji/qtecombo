@@ -8,6 +8,8 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] private float _defaultSpeed;
     private float _finalSpeed;
 
+    [SerializeField] private Vector3 _knockbackVector;
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -37,5 +39,10 @@ public class EnemyMove : MonoBehaviour
     public void StopMove()
     {
         _finalSpeed = 0;
+    }
+    
+    public void Knockback()
+    {
+        transform.position += _knockbackVector;
     }
 }

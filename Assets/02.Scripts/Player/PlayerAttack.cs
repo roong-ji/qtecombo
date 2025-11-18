@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -39,7 +37,7 @@ public class PlayerAttack : MonoBehaviour
         else Debug.Log("BAD");
 #endif
 
-        ScoreManager.Instance.AddScore(distance * enemy.DeafaultScore);
+        ScoreManager.Instance.AddScore(distance * enemy.DefaultScore);
 
         enemy.TakeHit();
     }

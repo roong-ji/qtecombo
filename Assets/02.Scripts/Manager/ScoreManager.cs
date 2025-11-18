@@ -1,4 +1,3 @@
-using NUnit.Framework.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +27,7 @@ public class ScoreManager : MonoBehaviour
     private float _timer;
     private const float LERP_TIME = 1f;
 
-    private const float MAX_SACLE = 1.5f;
+    private const float MAX_SCALE = 1.5f;
     private readonly Vector3 _originScale = Vector3.one;
 
     private void Start()
@@ -65,6 +64,6 @@ public class ScoreManager : MonoBehaviour
     {
         _timer = 0f;
         _score += score;
-        _scoreTextUI.rectTransform.localScale = _originScale * MAX_SACLE;
+        _scoreTextUI.rectTransform.localScale = _originScale * MAX_SCALE;
     }
 }

@@ -33,7 +33,7 @@ public class EnemyMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody2D.linearVelocityX = -_finalSpeed * Time.timeScale;
+        _rigidbody2D.linearVelocityX = -_finalSpeed;
     }
 
     public void StopMove()

@@ -31,7 +31,7 @@ public class TimeManager : MonoBehaviour
 
     public void SlowMotion(float time)
     {
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0f;
         _lerpTime = time;
         _slowMotion = true;
     }

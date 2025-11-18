@@ -37,8 +37,9 @@ public class PlayerBlock : MonoBehaviour
 
     private void HandleTimeScale()
     {
-        Time.timeScale = _targetTimeScale; ;
-        if (Input.GetKeyDown(KeyCode.F)) Debug.Log(Time.timeScale);
+        Time.timeScale = _targetTimeScale;
+        if (Input.GetKeyDown(KeyCode.F)) { Time.timeScale = 0; Debug.Log(Time.timeScale); }
+        if (Input.GetKeyDown(KeyCode.D)) { Time.timeScale = 1; Debug.Log(Time.timeScale); }
         //Time.timeScale = Mathf.Lerp(Time.timeScale, _targetTimeScale, Time.unscaledDeltaTime * _slowSpeed);
     }
 }

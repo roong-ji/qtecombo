@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 1219697269269804717}
   - component: {fileID: 2717842109253903370}
   m_Layer: 6
-  m_Name: FlyingEye
+  m_Name: UnFlyingEye
   m_TagString: FlyingEye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +153,7 @@ Transform:
   m_GameObject: {fileID: 7040062278839500695}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 2, z: 0}
+  m_LocalPosition: {x: 6, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746b8e4f3cf52224887376d24450bc61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultSpeed: 10
+  _defaultSpeed: 5
   _knockbackVector: {x: 0, y: 0, z: 0}
 --- !u!114 &-3682348284653129967
 MonoBehaviour:
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2296a2df93d296f4e9f45506dba16c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultScore: 2000
+  _defaultScore: 0
   _enemyType: 0
 --- !u!50 &1219697269269804717
 Rigidbody2D:

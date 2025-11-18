@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746b8e4f3cf52224887376d24450bc61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultSpeed: 3
+  _defaultSpeed: 5
   _knockbackVector: {x: 2, y: 0, z: 0}
 --- !u!114 &341144613737824207
 MonoBehaviour:

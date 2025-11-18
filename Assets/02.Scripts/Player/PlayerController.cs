@@ -3,22 +3,27 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerAnimator _playerAnimator;
-    private PlayerAction _playerAction;
+    private PlayerMove _playerMove;
+    private PlayerAttack _playerAttack;
+    private PlayerBlock _playerBlock;
     private Rigidbody2D _rigidbody2D;
 
     private bool _isJumping;
-    private bool _isDeath;
+    private bool _isBlocking;
+    private bool _canCounterAttack;
 
-    [Header("Ã¼·Â")]
-    [SerializeField] private int _health;
+    public bool IsBlocking => _isBlocking;
 
     private void Awake()
     {
         _playerAnimator = GetComponent<PlayerAnimator>();
-        _playerAction = GetComponent<PlayerAction>();
+        _playerMove = GetComponent<PlayerMove>();
+        _playerAttack = GetComponent<PlayerAttack>();
+        _playerBlock = GetComponent<PlayerBlock>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
-        _isDeath = false;
+        _isBlocking = false;
+        _canCounterAttack = false;
     }
 
     private void Update()
@@ -30,10 +35,15 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            InputAttack();
+            InputAttack(EEnemyType.FlyingEye);
         }
 
         if (Input.GetKeyDown(KeyCode.C))
+        {
+            InputAttack(EEnemyType.Mushroom);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             InputJump();
         }
@@ -41,42 +51,64 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.PlayFallAnimation(_rigidbody2D.linearVelocity.y);
     }
 
+    public void Block(Enemy enemy)
+    {
+        _canCounterAttack = true;
+        _playerBlock.Block(enemy);
+    }
+
     public void InputBlock()
     {
-        _playerAction.Block();
+        if(_canCounterAttack == true)
+        {
+            InputCounterAttack();
+            return;
+        }
+
+        _isBlocking = true;
         _playerAnimator.PlayBlockAnimation();
     }
 
-    public void InputAttack()
+    public void InputEndBlock()
     {
-        _playerAction.Attack();
-        _playerAnimator.PlayAttackAnimation();
+        _isBlocking = false;
+        _canCounterAttack = false;
+    }
+
+    private void InputCounterAttack()
+    {
+        _playerBlock.CounterAttack();
+        _playerAnimator.PlayBlockAttackAnimation();
+        InputEndBlock();
+    }
+
+    public void InputAttack(EEnemyType attackType)
+    {
+        _playerAttack.Attack(attackType);
+        _playerAnimator.PlayAttackAnimation(attackType);
+        InputEndBlock();
     }
 
     public void InputJump()
     {
         if (_isJumping == true) return;
 
-        _playerAction.Jump();
+        _playerMove.Jump();
         _playerAnimator.PlayJumpAnimation();
 
         _isJumping = true;
+        InputEndBlock();
     }
 
     public void TakeHit()
     {
         _playerAnimator.PlayHurtAnimation();
-        --_health;
-
-        if (_health > 0) return;
-        Death();
+        InputEndBlock();
     }
 
-    private void Death()
+    public void Death()
     {
-        if (!_isDeath == true) return;
         _playerAnimator.PlayDeathAnimation();
-        _isDeath = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -4,6 +4,9 @@ using UnityEngine;
 public enum EEnemyType
 {
     FlyingEye = 0,
+    Goblin = 1,
+    Mushroom = 2,
+    Skeleton = 3,
 }
 
 [Serializable]
@@ -33,7 +36,7 @@ public class EnemyFactory : MonoBehaviour
         _instance = this;
     }
 
-    [Header("¸ó½ºÅÍ ÇÁ¸®ÆÕ")]
+    [Header("ëª¬ìŠ¤í„° í”„ë¦¬íŒ¹")]
     [SerializeField] private EnemyData[] _enemies;
 
     private Dictionary<EEnemyType, List<GameObject>> _enemyPools;

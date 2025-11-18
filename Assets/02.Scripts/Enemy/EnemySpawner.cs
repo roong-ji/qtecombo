@@ -11,10 +11,10 @@ public struct SpawnPattern
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("¸ó½ºÅÍ ½ºÆù ÆĞÅÏ")]
+    [Header("ëª¬ìŠ¤í„° ìŠ¤í° íŒ¨í„´")]
     [SerializeField] private SpawnPattern[] _spawnPatterns;
 
-    private Queue<(EEnemyType Type, float Intervel)> _enemyQueue;
+    private Queue<(EEnemyType Type, float Interval)> _enemyQueue;
     private EEnemyType _nextEnemy;
     private float _nextInterval;
     private float _timer;
@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void NextPattern()
     {
-        // ´ÙÀ½ ÆĞÅÏ ÁöÁ¤
+        // ë‹¤ìŒ íŒ¨í„´ ì§€ì •
         int nextIndex = Random.Range(0, _spawnPatterns.Length);
         SpawnPattern spawnPattern = _spawnPatterns[nextIndex];
 
@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
     {
         var next = _enemyQueue.Dequeue();
         _nextEnemy = next.Type;
-        _nextInterval = next.Intervel;
+        _nextInterval = next.Interval;
 
         _timer = 0f;
     }

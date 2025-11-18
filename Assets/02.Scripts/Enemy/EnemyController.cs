@@ -1,47 +1,42 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour
 {
-    private EnemyAction _enemyAction;
-    private EnemyAnimator _enemyAnimator;
-    private GameObject _player;
+    protected EnemyMove _enemyMove;
+    protected EnemyAnimator _enemyAnimator;
+    protected Player _player;
 
-    private Collider2D _collider;
-
+    protected Collider2D _collider;
+    [SerializeField] private GameObject _guide;
+    
     private void Awake()
     {
-        _enemyAction = GetComponent<EnemyAction>();
+        _enemyMove = GetComponent<EnemyMove>();
         _enemyAnimator = GetComponent<EnemyAnimator>();
         _collider = GetComponent<Collider2D>();
     }
 
     private void OnEnable()
     {
-        Init();        
+        Init();
     }
 
-    private void Init()
-    {
-        _collider.enabled = true;
-    }
+    protected abstract void Init();
 
     private void PlayAttack()
     {
         _enemyAnimator.PlayAttackAnimation();
-        _enemyAction.StopMove();
+        _enemyMove.StopMove();
     }
 
-    public void Attack()
-    {
-        _player.GetComponent<PlayerController>().TakeHit();
-        _collider.enabled=false;
-    }
-    
+    public abstract void Attack();
+
     public void TakeHit()
     {
         _enemyAnimator.PlayTakeHitAnimation();
-        _enemyAction.StopMove();
+        _enemyMove.StopMove();
         _collider.enabled = false;
+        Destroy(_guide);
     }
 
     public void Death()
@@ -52,8 +47,7 @@ public class EnemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") == false) return;
-        _player = collision.gameObject;
+        _player = collision.GetComponent<Player>();
         PlayAttack();
     }
-
 }

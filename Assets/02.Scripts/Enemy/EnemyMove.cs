@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyAction : MonoBehaviour
+public class EnemyMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
 
@@ -18,9 +18,15 @@ public class EnemyAction : MonoBehaviour
         InitSpeed();
     }
 
-    private void InitSpeed()
+    public void InitSpeed()
     {
-        _finalSpeed = _defaultSpeed;
+        if(SpeedManager.Instance == null)
+        {
+            _finalSpeed = _defaultSpeed;
+            return;
+        }
+
+        _finalSpeed = SpeedManager.Instance.Speed * _defaultSpeed;
     }
 
     private void FixedUpdate()

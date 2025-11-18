@@ -6,6 +6,7 @@ public class EnemyAnimator : MonoBehaviour
 
     private readonly int _attack = Animator.StringToHash("Attack");
     private readonly int _takeHit = Animator.StringToHash("TakeHit");
+    private readonly int _blocked = Animator.StringToHash("Blocked");
 
     private void Awake()
     {
@@ -20,5 +21,10 @@ public class EnemyAnimator : MonoBehaviour
     public void PlayTakeHitAnimation()
     {
         _animator.SetTrigger(_takeHit);
+    }
+
+    public void PlayBlockedAnimation(bool blocked)
+    {
+        _animator.SetBool(_blocked, blocked);
     }
 }

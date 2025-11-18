@@ -109,6 +109,16 @@ public class PlayerController : MonoBehaviour
         InputEndBlock();
     }
 
+    public void InputGreenButton()
+    {
+        InputAttack(EEnemyType.FlyingEye);
+    }
+
+    public void InputBlueButton()
+    {
+        InputAttack(EEnemyType.Mushroom);
+    }
+
     public void InputJump()
     {
         if (_isJumping == true) return;

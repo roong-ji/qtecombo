@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         _instance = this;
+        Time.timeScale = 0f;
     }
 
     private bool _isGameOver = false;
@@ -28,7 +29,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 0f;
         _restartButton.SetActive(false);
         _line.SetActive(false);
     }

@@ -6,7 +6,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private readonly int[] _attack = { Animator.StringToHash("Attack1"),
                                         Animator.StringToHash("Attack2") };
-    private readonly int _blockAttack = Animator.StringToHash("Attack3");
+    private readonly int _counterAttack = Animator.StringToHash("Attack3");
     private readonly int _jump = Animator.StringToHash("Jump");
     private readonly int _block = Animator.StringToHash("Block");
     private readonly int _grounded = Animator.StringToHash("Grounded");
@@ -24,9 +24,9 @@ public class PlayerAnimator : MonoBehaviour
         _animator.SetTrigger(_attack[(int)attackType]);
     }
 
-    public void PlayBlockAttackAnimation()
+    public void PlayCounterAttackAnimation()
     {
-        _animator.SetTrigger(_blockAttack);
+        _animator.SetTrigger(_counterAttack);
     }
 
     public void PlayJumpAnimation()

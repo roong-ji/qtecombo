@@ -7,6 +7,8 @@ public class EnemyAnimator : MonoBehaviour
     private readonly int _attack = Animator.StringToHash("Attack");
     private readonly int _takeHit = Animator.StringToHash("TakeHit");
     private readonly int _blocked = Animator.StringToHash("Blocked");
+    private readonly int _shield = Animator.StringToHash("Shield");
+    private readonly int _idle = Animator.StringToHash("Idle");
 
     private void Awake()
     {
@@ -26,5 +28,15 @@ public class EnemyAnimator : MonoBehaviour
     public void PlayBlockedAnimation(bool blocked)
     {
         _animator.SetBool(_blocked, blocked);
+    }
+
+    public void PlayShieldAnimation()
+    {
+        _animator.SetTrigger(_shield);
+    }
+
+    public void PlayIdleAnimation()
+    {
+        _animator.SetTrigger(_idle);
     }
 }

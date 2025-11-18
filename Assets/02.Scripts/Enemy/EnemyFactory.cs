@@ -7,6 +7,7 @@ public enum EEnemyType
     Mushroom = 1,
     Goblin = 2,
     Skeleton = 3,
+    UnFlyingEye = 4,
 }
 
 [Serializable]

@@ -18,8 +18,14 @@ public class EnemyMove : MonoBehaviour
         InitSpeed();
     }
 
-    private void InitSpeed()
+    public void InitSpeed()
     {
+        if(SpeedManager.Instance == null)
+        {
+            _finalSpeed = _defaultSpeed;
+            return;
+        }
+
         _finalSpeed = SpeedManager.Instance.Speed * _defaultSpeed;
     }
 

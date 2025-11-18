@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Player _player;
     private PlayerAnimator _playerAnimator;
     private PlayerMove _playerMove;
     private PlayerAttack _playerAttack;
@@ -11,12 +10,12 @@ public class PlayerController : MonoBehaviour
 
     private bool _isJumping;
     private bool _isBlocking;
+    private bool _canCounterAttack;
 
     public bool IsBlocking => _isBlocking;
 
     private void Awake()
     {
-        _player = GetComponent<Player>();
         _playerAnimator = GetComponent<PlayerAnimator>();
         _playerMove = GetComponent<PlayerMove>();
         _playerAttack = GetComponent<PlayerAttack>();
@@ -24,6 +23,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
         _isBlocking = false;
+        _canCounterAttack = false;
     }
 
     private void Update()
@@ -51,40 +51,42 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.PlayFallAnimation(_rigidbody2D.linearVelocity.y);
     }
 
+    public void Block(Enemy enemy)
+    {
+        _canCounterAttack = true;
+        _playerBlock.Block(enemy);
+    }
+
     public void InputBlock()
     {
-        _isBlocking = true;
-        Debug.Log("blocked");
-        _playerAnimator.PlayBlockAnimation();
-
-        /*
-        if (_isIdleBlock == true)
+        if(_canCounterAttack == true)
         {
-            _playerBlock.BlockAttack();
-            _playerAnimator.PlayBlockAttackAnimation();
-            _isIdleBlock = false;
+            InputCounterAttack();
             return;
         }
 
+        _isBlocking = true;
         _playerAnimator.PlayBlockAnimation();
-        
-        if (_playerBlock.Block() == false) return;
-        _playerAnimator.PlayIdleBlockAnimation();
-
-        _isIdleBlock = true;*/
     }
 
     public void InputEndBlock()
     {
-        Debug.Log("block end");
         _isBlocking = false;
+        _canCounterAttack = false;
+    }
+
+    private void InputCounterAttack()
+    {
+        _playerBlock.CounterAttack();
+        _playerAnimator.PlayBlockAttackAnimation();
+        InputEndBlock();
     }
 
     public void InputAttack(EEnemyType attackType)
     {
         _playerAttack.Attack(attackType);
         _playerAnimator.PlayAttackAnimation(attackType);
-        //InputEndBlock();
+        InputEndBlock();
     }
 
     public void InputJump()
@@ -95,7 +97,7 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.PlayJumpAnimation();
 
         _isJumping = true;
-        //InputEndBlock();
+        InputEndBlock();
     }
 
     public void TakeHit()

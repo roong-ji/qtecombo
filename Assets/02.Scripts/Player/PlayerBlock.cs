@@ -2,29 +2,17 @@ using UnityEngine;
 
 public class PlayerBlock : MonoBehaviour
 {
-    [Header("방어 범위")]
-    [SerializeField] private Transform _attackBox;
-    [SerializeField] private float _attackBoxLength;
-    [SerializeField] private LayerMask _enemyLayer;
-
     private Enemy _enemy;
 
-    public bool Block()
+    public void Block(Enemy enemy)
     {
-        RaycastHit2D hit = Physics2D.Raycast(
-        _attackBox.position,
-        Vector2.right,
-        _attackBoxLength,
-        _enemyLayer
-        );
+        _enemy = enemy;
 
-        if (hit.collider == null) return false;
-
-        _enemy = hit.collider.GetComponent<Enemy>();
-        return true;
+        // 시간이 느려짐
+        // 일정 시간 대기 후 복구 및 블락 상태 해제
     }
 
-    public void BlockAttack()
+    public void CounterAttack()
     {
         if (_enemy == null) return;
 

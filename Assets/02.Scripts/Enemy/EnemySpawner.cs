@@ -28,6 +28,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.IsGameOver == true) return;
+
         _timer += Time.deltaTime;
 
         if (_timer < _nextInterval) return;

@@ -7,7 +7,7 @@ public abstract class EnemyController : MonoBehaviour
     protected Player _player;
 
     protected Collider2D _collider;
-    [SerializeField] private GameObject _guide;
+    [SerializeField] protected GameObject _guide;
     
     private void Awake()
     {
@@ -33,7 +33,7 @@ public abstract class EnemyController : MonoBehaviour
 
     public abstract void Attack();
 
-    public void TakeHit()
+    public virtual void TakeHit()
     {
         _enemyAnimator.PlayTakeHitAnimation();
         _enemyMove.StopMove();
@@ -47,9 +47,10 @@ public abstract class EnemyController : MonoBehaviour
     }
 
 
-    public void Death()
+    public virtual void Death()
     {
         gameObject.SetActive(false);
+        Destroy(_guide);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

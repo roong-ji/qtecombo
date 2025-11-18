@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: -9140596793003627978}
   - component: {fileID: -980107879369269281}
   - component: {fileID: 523681932599869563}
+  - component: {fileID: 1712268687382481933}
+  - component: {fileID: 3140192768383300192}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -242,6 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
+  _maxHealth: 0
 --- !u!114 &-980107879369269281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,9 +259,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackBox: {fileID: 3534579121392812598}
   _attackBoxLength: 2
+  _attackBoxSize: {x: 5, y: 8}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  _judgeManager: {fileID: 0}
 --- !u!114 &523681932599869563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +276,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53c8c06a243dd04981d41e12445c65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1712268687382481933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4633466841200656672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86d7a1600c0e584a8c4330e67f07799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emptyColor: {r: 0.5882353, g: 0.19607843, b: 0.19607843, a: 1}
+  _hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &3140192768383300192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4633466841200656672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebea4713894c81c4782f0e14f7dbc11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShakeAmount: 0.1
+  ShakeTime: 0
 --- !u!1 &6333867740558233771
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,9 +29,9 @@ public class Player : MonoBehaviour
         _playerController.Death();
     }
 
-    public void Block(Enemy enemy)
+    public void Counter(Enemy enemy)
     {
-        _playerController.Block(enemy);
+        _playerController.Counter(enemy);
     }
 
     public void Heal()
@@ -39,6 +39,10 @@ public class Player : MonoBehaviour
         if (_health >= _maxHealth) return;
         ++_health;
         _healthUI.OnHealthUI();
+    }
 
+    public void QTEMode(bool qte)
+    {
+        _playerController.QTEMode(qte);
     }
 }

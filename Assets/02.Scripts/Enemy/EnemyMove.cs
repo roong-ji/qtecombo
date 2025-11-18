@@ -33,14 +33,15 @@ public class EnemyMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody2D.linearVelocityX = -_finalSpeed;
+        _rigidbody2D.linearVelocityX = -_finalSpeed * Time.timeScale;
     }
 
     public void StopMove()
     {
         _finalSpeed = 0;
+
     }
-    
+
     public void Knockback()
     {
         transform.position += _knockbackVector;

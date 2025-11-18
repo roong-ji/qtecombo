@@ -3,8 +3,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("점수 증가량")]
-    [SerializeField] private float _deafaultScore;
-    public float DeafaultScore => _deafaultScore;
+    [SerializeField] private float _defaultScore;
+    public float DefaultScore => _defaultScore;
 
     [SerializeField] EEnemyType _enemyType;
 
@@ -18,6 +18,11 @@ public class Enemy : MonoBehaviour
     public void TakeHit()
     {
         _enemyController.TakeHit();
+    }
+
+    public void Knockback()
+    {
+        _enemyController.Knockback();
     }
 
     public bool CompareType(EEnemyType enemyType)

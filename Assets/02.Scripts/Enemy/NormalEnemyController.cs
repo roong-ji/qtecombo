@@ -1,11 +1,7 @@
 using UnityEngine;
 
-public class FlyingEyeController : EnemyController
+public class NormalEnemyController : EnemyController
 {
-    protected override void Init()
-    {
-        _collider.enabled = true;
-    }
     public override void Attack()
     {
         _player.TakeHit();

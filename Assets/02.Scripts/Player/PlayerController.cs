@@ -72,7 +72,6 @@ public class PlayerController : MonoBehaviour
     public void InputEndBlock()
     {
         _isBlocking = false;
-        _canCounterAttack = false;
     }
 
     private void InputCounterAttack()
@@ -80,6 +79,7 @@ public class PlayerController : MonoBehaviour
         _playerBlock.CounterAttack();
         _playerAnimator.PlayBlockAttackAnimation();
         InputEndBlock();
+        _canCounterAttack = false;
     }
 
     public void InputAttack(EEnemyType attackType)

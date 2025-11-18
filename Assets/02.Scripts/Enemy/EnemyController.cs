@@ -20,8 +20,10 @@ public abstract class EnemyController : MonoBehaviour
     {
         Init();
     }
-
-    protected abstract void Init();
+    private void Init()
+    {
+        _collider.enabled = true;
+    }
 
     private void PlayAttack()
     {
@@ -38,6 +40,12 @@ public abstract class EnemyController : MonoBehaviour
         _collider.enabled = false;
         Destroy(_guide);
     }
+
+    public void Knockback()
+    {
+        _enemyMove.Knockback();
+    }
+
 
     public void Death()
     {

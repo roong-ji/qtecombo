@@ -1,12 +1,7 @@
 using UnityEngine;
 
-public class GoblinController : EnemyController
+public class BlockableEnemyController : EnemyController
 {
-    protected override void Init()
-    {
-        _collider.enabled = true;
-    }
-
     public override void Attack()
     {
 

@@ -2,14 +2,22 @@ using UnityEngine;
 
 public class PlayerBlock : MonoBehaviour
 {
+    [Header("슬로우 모션 설정")]
+    private float _slowSpeed = 50f;
+    private float _targetTimeScale = 1f;
+
     private Enemy _enemy;
+
+    private void Update()
+    {
+        HandleTimeScale();
+
+    }
 
     public void Block(Enemy enemy)
     {
         _enemy = enemy;
-
-        // 시간이 느려짐
-        // 일정 시간 대기 후 복구 및 블락 상태 해제
+        _targetTimeScale = 0f;
     }
 
     public void CounterAttack()
@@ -20,8 +28,17 @@ public class PlayerBlock : MonoBehaviour
         Debug.Log("COUNTER ATTACK!!!");
 #endif
 
-        ScoreManager.Instance.AddScore(_enemy.DeafaultScore);
-
+        ScoreManager.Instance.AddScore(_enemy.DefaultScore);
         _enemy.TakeHit();
+        _enemy.Knockback();
+
+        _targetTimeScale = 1f;
+    }
+
+    private void HandleTimeScale()
+    {
+        Time.timeScale = _targetTimeScale; ;
+        if (Input.GetKeyDown(KeyCode.F)) Debug.Log(Time.timeScale);
+        //Time.timeScale = Mathf.Lerp(Time.timeScale, _targetTimeScale, Time.unscaledDeltaTime * _slowSpeed);
     }
 }

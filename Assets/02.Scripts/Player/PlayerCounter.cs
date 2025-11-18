@@ -2,21 +2,14 @@ using UnityEngine;
 
 public class PlayerCounter : MonoBehaviour
 {
-    [Header("슬로우 모션 설정")]
-    private float _lerpSpeed = 50f;
-    private float _targetTimeScale = 1f;
-
     private Enemy _enemy;
 
-    private void Update()
-    {
-        //HandleTimeScale();
-    }
+    private float _lerpTime = 1f;
 
     public void Counter(Enemy enemy)
     {
         _enemy = enemy;
-        //Time.timeScale = 0f;
+        TimeManager.Instance.SlowMotion(_lerpTime);
     }
 
     public void CounterAttack()
@@ -28,8 +21,4 @@ public class PlayerCounter : MonoBehaviour
         _enemy.Knockback();
     }
 
-    private void HandleTimeScale()
-    {
-        Time.timeScale = Mathf.Lerp(0f, _targetTimeScale, Time.unscaledDeltaTime * _lerpSpeed);
-    }
 }

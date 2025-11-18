@@ -136,7 +136,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14f6628a1113cd4399209a68d178dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpForce: 8
+  _jumpForce: 20
 --- !u!114 &3143471684040900012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 3
-  _maxHealth: 0
+  _maxHealth: 3
 --- !u!114 &-980107879369269281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackBox: {fileID: 3534579121392812598}
   _attackBoxLength: 2
-  _attackBoxSize: {x: 5, y: 8}
+  _attackBoxSize: {x: 12, y: 8}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64

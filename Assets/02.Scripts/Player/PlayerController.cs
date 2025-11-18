@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private float _attackShake = 0.1f;
     private float _counterShakeTime = 0.3f;
     private float _counterShake = 5f;
+    private float _lerpTime = 2.5f;
 
     private bool _isJumping;
     private bool _isBlocking;
@@ -129,7 +130,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerAnimator.PlayDeathAnimation();
         EnemyFactory.Instance.ReturnAllEnemy();
-        Time.timeScale = 1f;
+        TimeManager.Instance.SlowMotion(_lerpTime);
         GameManager.Instance.GameOver();
     }
 

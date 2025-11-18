@@ -166,7 +166,7 @@ MonoBehaviour:
   _enemies:
   - Type: 0
     Prefab: {fileID: 7040062278839500695, guid: 5d223d2bc1e491c42b23f39c52658689, type: 3}
-    PoolSize: 20
+    PoolSize: 7
     Index: 0
   - Type: 1
     Prefab: {fileID: 6587020800165498118, guid: 004a3e9f96022a54097d4d667ba7d8bf, type: 3}
@@ -174,7 +174,7 @@ MonoBehaviour:
     Index: 0
   - Type: 2
     Prefab: {fileID: 429275729064692267, guid: 459bd12247e805d4a8ae76d2a05a7fd4, type: 3}
-    PoolSize: 10
+    PoolSize: 7
     Index: 0
   - Type: 3
     Prefab: {fileID: 6933940634664271175, guid: fde3db1edc37f614da5b376245082c59, type: 3}
@@ -876,7 +876,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952690976}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a7758ca60074ad4fa89575fc6edfd67, type: 3}
   m_Name: 
@@ -1531,7 +1531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1
-  _speedupInterval: 5
+  _speedupInterval: 7
   _speedIncrement: 0.2
 --- !u!4 &1376929055
 Transform:
@@ -2141,6 +2141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1860150954}
+  - component: {fileID: 1860150955}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -2163,6 +2164,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1860150955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860150953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f7ce22198973345920e7b7aacd34c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1911753505
 GameObject:
   m_ObjectHideFlags: 0
@@ -2549,10 +2562,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -9140596793003627978, guid: a68702359f15c4c4a857ad0d20d6d713, type: 3}
-      propertyPath: _maxHealth
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: -980107879369269281, guid: a68702359f15c4c4a857ad0d20d6d713, type: 3}
       propertyPath: _judgeManager
       value: 
@@ -2560,6 +2569,10 @@ PrefabInstance:
     - target: {fileID: -980107879369269281, guid: a68702359f15c4c4a857ad0d20d6d713, type: 3}
       propertyPath: _attackBoxSize.x
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 342210730161681837, guid: a68702359f15c4c4a857ad0d20d6d713, type: 3}
+      propertyPath: _jumpForce
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1712268687382481933, guid: a68702359f15c4c4a857ad0d20d6d713, type: 3}
       propertyPath: '_hearts.Array.data[0]'

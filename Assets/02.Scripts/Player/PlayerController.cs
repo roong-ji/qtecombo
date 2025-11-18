@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Player _player;
     private PlayerAnimator _playerAnimator;
     private PlayerMove _playerMove;
     private PlayerAttack _playerAttack;
@@ -11,13 +10,12 @@ public class PlayerController : MonoBehaviour
 
     private bool _isJumping;
     private bool _isBlocking;
-    private bool _counterAttack;
+    private bool _canCounterAttack;
 
     public bool IsBlocking => _isBlocking;
 
     private void Awake()
     {
-        _player = GetComponent<Player>();
         _playerAnimator = GetComponent<PlayerAnimator>();
         _playerMove = GetComponent<PlayerMove>();
         _playerAttack = GetComponent<PlayerAttack>();
@@ -25,7 +23,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _isJumping = false;
         _isBlocking = false;
-        _counterAttack = false;
+        _canCounterAttack = false;
     }
 
     private void Update()
@@ -55,35 +53,33 @@ public class PlayerController : MonoBehaviour
 
     public void Block(Enemy enemy)
     {
-        _counterAttack = true;
+        _canCounterAttack = true;
         _playerBlock.Block(enemy);
     }
 
     public void InputBlock()
     {
-        if(_counterAttack == true)
+        if(_canCounterAttack == true)
         {
             InputCounterAttack();
             return;
         }
 
         _isBlocking = true;
-        Debug.Log("blocked");
         _playerAnimator.PlayBlockAnimation();
     }
 
     public void InputEndBlock()
     {
-        Debug.Log("block end");
         _isBlocking = false;
-        _counterAttack = false;
+        _canCounterAttack = false;
     }
 
     private void InputCounterAttack()
     {
-        _playerBlock.BlockAttack();
+        _playerBlock.CounterAttack();
         _playerAnimator.PlayBlockAttackAnimation();
-        _counterAttack = false;
+        InputEndBlock();
     }
 
     public void InputAttack(EEnemyType attackType)

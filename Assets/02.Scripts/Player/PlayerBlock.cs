@@ -12,7 +12,7 @@ public class PlayerBlock : MonoBehaviour
         // 일정 시간 대기 후 복구 및 블락 상태 해제
     }
 
-    public void BlockAttack()
+    public void CounterAttack()
     {
         if (_enemy == null) return;
 

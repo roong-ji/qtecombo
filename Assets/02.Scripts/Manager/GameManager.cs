@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    private bool _isGameOver = false;
+    private bool _isGameOver = true;
     public bool IsGameOver => _isGameOver;
 
     [SerializeField] private GameObject _startButton;
@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
+        _isGameOver = false;
         Time.timeScale = 1f;
         _startButton.SetActive(false);
         _line.SetActive(true);

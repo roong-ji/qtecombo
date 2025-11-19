@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     private bool _isBlocking;
     private bool _qteMode;
 
+    private EButton _inputButton;
+    public EButton InputButton => _inputButton;
+    
     public bool IsBlocking => _isBlocking;
 
     private void Awake()
@@ -38,8 +41,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_qteMode == true || GameManager.Instance.IsGameOver) return;
-
         if (Input.GetKeyDown(KeyCode.Z))
         {
             InputBlock();
@@ -47,12 +48,12 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            InputAttack(EEnemyType.FlyingEye);
+            InputGreenButton();
         }
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            InputAttack(EEnemyType.Mushroom);
+            InputBlueButton();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
     public void QTEMode(bool qte)
     {
         _qteMode = qte;
+        _inputButton = 0;
     }
 
     public void Counter(Enemy enemy)
@@ -76,6 +78,10 @@ public class PlayerController : MonoBehaviour
 
     public void InputBlock()
     {
+        if (GameManager.Instance.IsGameOver) return;
+        _inputButton = EButton.Orange;
+        if (_qteMode == true) return;
+
         _isBlocking = true;
         _playerAnimator.PlayBlockAnimation();
     }
@@ -111,16 +117,26 @@ public class PlayerController : MonoBehaviour
 
     public void InputGreenButton()
     {
+        if (GameManager.Instance.IsGameOver) return;
+        _inputButton = EButton.Green;
+        if (_qteMode == true) return;
         InputAttack(EEnemyType.FlyingEye);
     }
 
     public void InputBlueButton()
     {
+        if (GameManager.Instance.IsGameOver) return;
+        _inputButton = EButton.Blue;
+        if (_qteMode == true) return;
         InputAttack(EEnemyType.Mushroom);
     }
 
     public void InputJump()
     {
+        if (GameManager.Instance.IsGameOver) return;
+        _inputButton = EButton.Red;
+        if (_qteMode == true) return;
+
         if (_isJumping == true) return;
 
         _playerMove.Jump();

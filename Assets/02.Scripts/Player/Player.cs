@@ -45,4 +45,9 @@ public class Player : MonoBehaviour
     {
         _playerController.QTEMode(qte);
     }
+
+    public EButton GetInputButton()
+    {
+        return _playerController.InputButton;
+    }
 }

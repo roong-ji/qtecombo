@@ -1,6 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum EButton
+{
+    None = 0,
+    Red = 1,
+    Orange = 2,
+    Green = 3,
+    Blue = 4,
+}
+
 public class QTEEnemyController : EnemyController
 {
     [SerializeField] private GameObject _arrow;
@@ -11,15 +20,6 @@ public class QTEEnemyController : EnemyController
     private EButton _inputButton;
     private int _index;
     private Vector2 _originArrowPosition;
-
-    public enum EButton
-    {
-        None = 0,
-        Red = 1,
-        Orange = 2,
-        Green = 3,
-        Blue = 4,
-    }
 
     private void Start()
     {
@@ -44,25 +44,7 @@ public class QTEEnemyController : EnemyController
     {
         if (_qteQueue.Count <= 0) return;
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            _inputButton = EButton.Orange;
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            _inputButton = EButton.Green;
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            _inputButton = EButton.Blue;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _inputButton = EButton.Red;
-        }
+        _inputButton = _player.GetInputButton();
 
         if ((int)_inputButton - 1 == _qteQueue.Peek())
         {
@@ -70,6 +52,7 @@ public class QTEEnemyController : EnemyController
             _inputButton = 0;
             _guideButtons[_index++].SetActive(false);
             _arrow.transform.position += Vector3.right;
+            _player.QTEMode(true);
 
             if (_qteQueue.Count > 0) return;
             EndQTE(); 
